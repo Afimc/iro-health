@@ -9,7 +9,7 @@ export function Layout() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/enter">Enter</Link>
+            <Link to="/login">Login</Link>
           </li>
           <li>
             <Link to="/app">App</Link>

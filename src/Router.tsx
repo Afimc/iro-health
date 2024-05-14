@@ -14,7 +14,7 @@ export function Router() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path="enter" element={<EnterPage />} />
+        <Route path="login" element={<EnterPage />} />
         <Route path="app" element={<AppPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Route>

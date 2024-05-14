@@ -7,15 +7,15 @@ export function AppPage() {
 
   useEffect(()=>{
     const isLoggedIn = !!currentUser
-    if(!isLoggedIn){
+    if(!isLoggedIn) {
       navigate('/login')
     }
   },[]);
 
     return (
-    <div className="app-page">
-      App Page
-    </div>
+       !currentUser
+        ? <p>loading</p>
+        : <div className="app-page">App Page</div>
     );
   };
   
