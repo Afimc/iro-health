@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './Router.css';
 import { Layout } from "./pages/layout";
 import { HomePage } from "./pages/home/home";
 import { EnterPage } from "./pages/enter/enter";
