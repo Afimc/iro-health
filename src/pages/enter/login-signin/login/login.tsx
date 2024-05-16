@@ -1,12 +1,13 @@
 import './login.scss';
 import { useEffect, useState } from "react";
-import { currentUser, logInWithEmail } from "../../../../core/firebase/config";
-import { useNavigate } from "react-router-dom";
+import { auth, logInWithEmail } from "../../../../core/firebase/config";
+import { useNavigate } from 'react-router-dom';
+
 
 export function Login() {
   const navigate = useNavigate()
   useEffect(()=>{
-    const isLoggedIn = !!currentUser
+    const isLoggedIn = !!auth.currentUser
     if(isLoggedIn) {
       navigate('/app')
     }
@@ -28,14 +29,17 @@ export function Login() {
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
-    console.log(formData)
-    
     logInWithEmail(formData.email, formData.password)
+      .then(()=>{
+        navigate('/app')
+      })
+      .catch((error)=>{
+        console.log(error)
+      })
     setFormData({
       email: '',
       password: ''
     });
-    console.log(formData)
   };
 
 
