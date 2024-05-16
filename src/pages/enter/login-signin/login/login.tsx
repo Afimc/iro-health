@@ -1,26 +1,42 @@
-import { useState } from "react";
-import './login.scss'
-
+import './login.scss';
+import { useEffect, useState } from "react";
+import { currentUser, logInWithEmail } from "../../../../core/firebase/config";
+import { useNavigate } from "react-router-dom";
 
 export function Login() {
+  const navigate = useNavigate()
+  useEffect(()=>{
+    const isLoggedIn = !!currentUser
+    if(isLoggedIn) {
+      navigate('/app')
+    }
+  },[]);
+
     const [formData, setFormData] = useState({
         email: '',
         password: ''
       });
+     
     
-      const handleChange = (e:any) => {
-        const { name, value } = e.target;
-        setFormData({
-          ...formData,
-          [name]: value
-        });
-      };
+  const handleChange = (e:any) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = (e:any) => {
+    e.preventDefault();
+    console.log(formData)
     
-      const handleSubmit = (e:any) => {
-        e.preventDefault();
-        // You can add your login logic here
-        console.log(formData);
-      };
+    logInWithEmail(formData.email, formData.password)
+    setFormData({
+      email: '',
+      password: ''
+    });
+    console.log(formData)
+  };
 
 
     return (

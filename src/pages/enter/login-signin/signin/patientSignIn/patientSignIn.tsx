@@ -20,6 +20,11 @@ export function PatientSignIn() {
         e.preventDefault();
         createUserWithEmail(formData.email, formData.password)
         console.log(formData);
+        setFormData({
+          email: '',
+          password: '',
+        })
+        console.log(formData)
       };
 
     return (
