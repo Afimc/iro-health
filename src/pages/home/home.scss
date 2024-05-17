@@ -5,17 +5,16 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
-    
 
     .home-text{
         text-align:left;
-        
         margin: 5%;
         width: 20%;
         height: 25%;
         border: solid 1px black;
     }
     .app-example{
+        cursor: pointer;
         background-image: url('../../assets/example.png');
         background-position: center;
         background-repeat: no-repeat;

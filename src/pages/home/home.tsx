@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import './home.scss'
 
 export function HomePage() {
+  const navigate = useNavigate()
+
   return (
   <div className="home-page">
     <div className="home-text">
@@ -10,7 +13,7 @@ export function HomePage() {
         tenetur vel voluptatum distinctio laborum nihil itaque, aut expedita.
       </p>
     </div>
-    <div className="app-example">
+    <div className="app-example" onClick={()=>navigate('/app')}>
       
     </div>
   </div>

@@ -1,14 +1,27 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route,  } from "react-router-dom";
 import { Layout } from "./pages/layout";
 import { HomePage } from "./pages/home/home";
 import { EnterPage } from "./pages/enter/enter";
 import { AppPage } from "./pages/app/app";
 import { ErrorPage } from "./pages/error/error";
 import './router.scss'
+// import { useEffect, useState } from "react";
+// import { auth } from "./core/firebase/config";
 
 
 export function Router() {
-
+  // const navigate = useNavigate()
+  // useEffect(()=>{
+  //   console.log('test')
+  //   auth.onAuthStateChanged((user)=>{
+  //     console.log({user})
+  //     if (user) {
+  //       navigate('/app')
+  //     } else {
+  //       navigate('/login')
+  //     }
+  //   })
+  // },[])
   return (
     <div className="router">
       <BrowserRouter>
@@ -22,7 +35,6 @@ export function Router() {
         </Routes>
       </BrowserRouter>
     </div>
-
   );
 };
 
