@@ -1,20 +1,21 @@
+import "./app.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {  addSimptoms, auth, logOut,  } from "../../core/firebase/config";
-import "./app.scss";
+import { logOut, onSnapshotUserCollection,  } from "../../core/firebase/config";
 import { LoadingWrapper } from "../../shared/loadingWrapper/loadingWrapper";
 import { userStore } from "../../core/stores/userStore";
-import { ISimptomsData } from "../../core/interfaces";
+
 
 export function AppPage() {
-
   const userStatus = userStore((state) => state.userStatus);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!userStatus.islogedIn) {
+    if (userStatus==='LoggedOut') {
       navigate("/login");
     }
+    const info = onSnapshotUserCollection(()=>{})
+    console.log(info)
   }, []);
 
   const [SimptomData, setSimptomData] = useState({
@@ -33,26 +34,8 @@ export function AppPage() {
   const handleSubmit = (e: any) => {
     e.preventDefault();
    console.log(SimptomData)
-  //  const strenghtData = []
-  //  strenghtData.push(Number(SimptomData.strenght))
-  // //  const data:ISimptomsData={
-  // //   UserUID:auth.currentUser?.uid || '',
-  // //   simptoms :[
-  // //     {
-  // //         strength: strenghtData,
-  // //         symptom_description: SimptomData.simptomsDiscribtion,
-  // //     },
-  // // ],
-  // //  }
-  // //   setUser(data)
-  // //  addSimptoms(user)
-  // //  setSimptomData({
-  //     simptomsDiscribtion: "",
-    //   strenght: '',
-    // });
-  };
-  // const update = updateDocs( user.simptoms)
 
+  }
 
   function onLogOut() {
     logOut();
@@ -60,7 +43,7 @@ export function AppPage() {
   }
 
   return (
-    <LoadingWrapper isLoading={userStatus.pending}>
+    <LoadingWrapper isLoading={userStatus}>
       {
         <div className="app-page">
           <button onClick={() => onLogOut()}>LogOut</button>
@@ -91,4 +74,4 @@ export function AppPage() {
       }
     </LoadingWrapper>
   );
-}
+  }

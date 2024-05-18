@@ -1,14 +1,15 @@
 import './login.scss';
 import { useEffect, useState } from "react";
-import { auth, logInWithEmail } from "../../../../core/firebase/config";
+import { logInWithEmail } from "../../../../core/firebase/config";
 import { useNavigate } from 'react-router-dom';
+import { userStore } from '../../../../core/stores/userStore';
 
 
 export function Login() {
+  const userStatus = userStore((state) => state.userStatus);
   const navigate = useNavigate()
   useEffect(()=>{
-    const isLoggedIn = !!auth.currentUser
-    if(isLoggedIn) {
+    if(userStatus === 'LoggedIn') {
       navigate('/app')
     }
   },[]);
@@ -17,7 +18,6 @@ export function Login() {
         email: '',
         password: ''
       });
-     
     
   const handleChange = (e:any) => {
     const { name, value } = e.target;
@@ -41,7 +41,6 @@ export function Login() {
       password: ''
     });
   };
-
 
     return (
         <div className="login">

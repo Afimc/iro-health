@@ -1,29 +1,33 @@
+export type TStatus = 'LoggedIn' | 'LoggedOut' | 'Pending';
+
 export interface ILoadingWrapperProps {
-    isLoading: boolean;
+    isLoading: string;
     children: React.ReactNode;
 }
 
-
-interface IStatus {
-    islogedIn: boolean;
-    pending: boolean;
+export interface ISimptomStrenght {
+    value: number;
+    time: string;
 }
 
+export interface IsymprmDescription {
+    value: string;
+    time: string;
+}
 
 export interface IUserStore {
     userUID: string;
-    simptoms: ISimptomsData[]
-    userStatus: IStatus;
+    simptoms: ISimptomsData[];
+    userStatus: TStatus;
 
-    setUserUID :(s: string) => void
-    setSimptoms : (s: ISimptomsData[]) => void;
-    setUserStatus : (s: IStatus) => void;
-
+    setUserUID: (s: string) => void;
+    setSimptoms: (s: ISimptomsData[]) => void;
+    setUserStatus: (s: TStatus) => void;
 }
 
 export interface ISimptomsData {
-    strength:number[],
-    symptom_description :string,
+    strength: ISimptomStrenght;
+    symptom_description: IsymprmDescription;
 }
 
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './patientSignIn.scss'
+import './patientSignIn.scss';
 import { createUserWithEmail } from '../../../../../core/firebase/config';
 
 export function PatientSignIn() {
@@ -18,11 +18,11 @@ export function PatientSignIn() {
     
       const handleSubmit = (e:any) => {
         e.preventDefault();
-        createUserWithEmail(formData.email, formData.password)
+        createUserWithEmail(formData.email, formData.password);
         setFormData({
           email: '',
           password: '',
-        })
+        });
       };
 
     return (
