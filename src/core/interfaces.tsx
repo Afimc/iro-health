@@ -17,6 +17,7 @@ export interface IsymprmDescription {
 
 export interface IUserStore {
     userUID: string;
+    userEmail:string;
     simptoms: ISimptomsData[];
     userStatus: TStatus;
 

@@ -4,6 +4,7 @@ import { onLogIn } from "../../shared/firebaseFunctions";
 
 export const userStore = create<IUserStore>()((set) => ({
     userUID: '',
+    userEmail:'',
     simptoms: [
         {
             strength:{
@@ -16,7 +17,7 @@ export const userStore = create<IUserStore>()((set) => ({
             }
         }
     ],
-    userStatus: 'LoggedOut',
+    userStatus: 'LoggedIn',
 
     setUserUID: (s) => set(() => ({ userUID: s })),
     setSimptoms: (s) => set(() => ({ simptoms: s })),

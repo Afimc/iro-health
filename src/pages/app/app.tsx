@@ -1,12 +1,13 @@
 import "./app.scss";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { logOut, onSnapshotUserCollection,  } from "../../core/firebase/config";
+import { logOut } from "../../core/firebase/config";
 import { LoadingWrapper } from "../../shared/loadingWrapper/loadingWrapper";
 import { userStore } from "../../core/stores/userStore";
 
 
 export function AppPage() {
+  const setUserStatus = userStore((state)=> state.setUserStatus)
   const userStatus = userStore((state) => state.userStatus);
   const navigate = useNavigate();
 
@@ -14,8 +15,7 @@ export function AppPage() {
     if (userStatus==='LoggedOut') {
       navigate("/login");
     }
-    const info = onSnapshotUserCollection(()=>{})
-    console.log(info)
+ 
   }, []);
 
   const [SimptomData, setSimptomData] = useState({
@@ -33,13 +33,17 @@ export function AppPage() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-   console.log(SimptomData)
+    
+    
+
 
   }
 
   function onLogOut() {
     logOut();
+    setUserStatus('LoggedOut')
     navigate("/");
+    
   }
 
   return (

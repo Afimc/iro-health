@@ -6,6 +6,7 @@ import { userStore } from '../../../../core/stores/userStore';
 
 
 export function Login() {
+  const setUserStatus = userStore((state)=> state.setUserStatus)
   const userStatus = userStore((state) => state.userStatus);
   const navigate = useNavigate()
   useEffect(()=>{
@@ -31,15 +32,17 @@ export function Login() {
     e.preventDefault();
     logInWithEmail(formData.email, formData.password)
       .then(()=>{
-        navigate('/app')
+        navigate('/app');
+        setUserStatus('LoggedIn')
+        setFormData({
+          email: '',
+          password: ''
+        });
       })
       .catch((error)=>{
         console.log(error)
       })
-    setFormData({
-      email: '',
-      password: ''
-    });
+    
   };
 
     return (

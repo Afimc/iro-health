@@ -1,8 +1,28 @@
-import { onSnapshotUserCollection, unSubscribe } from "../core/firebase/config"
+import { SetDOC, onSnapshotUserCollection, unSubscribe } from "../core/firebase/config"
 
 export const onLogIn = () => {
-   const info = unSubscribe()
-   console.log(info)
-   
 
+
+}
+
+export function OnSignIn(res:any) {
+    
+    const data={
+        userUID: res.user.uid,
+        userEmail:  res.user.email,
+        simptoms: [
+            {
+                strength:{
+                    value: 0,
+                    time: new Date().toString(),
+                },
+                symptom_description: {
+                    value: 'defoult',
+                    time: new Date().toString()
+                }
+            }
+        ],
+      }
+      SetDOC(res.user.uid,data)
+     console.log(res.user.uid)
 }
