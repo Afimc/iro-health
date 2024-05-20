@@ -15,15 +15,28 @@ export interface IsymprmDescription {
     time: string;
 }
 
-export interface IUserStore {
+export interface IUserData {
     userUID: string;
-    userEmail:string;
+    userName: string;
+    userEmail: string;
+    userPhoneNumber: string;
+    userAddress: string;
     simptoms: ISimptomsData[];
+}
+
+export interface IUserStore {
+    userData: IUserData
     userStatus: TStatus;
 
+    setUserData: (s: IUserData) => void;
     setUserUID: (s: string) => void;
+    setUserName: (s: string) => void;
+    setUserEmail: (s: string) => void;
+    setUserPhoneNumber: (s: string) => void;
+    setUserAddress: (s: string) => void;
     setSimptoms: (s: ISimptomsData[]) => void;
     setUserStatus: (s: TStatus) => void;
+    logIn: (s:any) => void;
 }
 
 export interface ISimptomsData {

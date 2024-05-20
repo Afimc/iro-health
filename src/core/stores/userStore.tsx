@@ -3,25 +3,35 @@ import { IUserStore } from "../interfaces";
 import { onLogIn } from "../../shared/firebaseFunctions";
 
 export const userStore = create<IUserStore>()((set) => ({
-    userUID: '',
-    userEmail:'',
-    simptoms: [
-        {
-            strength:{
-                value: 0,
-                time: new Date().toString(),
+    userData: {
+        userUID: '',
+        userName: '',
+        userEmail:'',
+        userPhoneNumber:'',
+        userAddress: '',
+        simptoms: [
+            {
+                strength:{
+                    value: 0,
+                    time: new Date().toString(),
+                },
+                symptom_description: {
+                    value: '',
+                    time: new Date().toString()
+                },
             },
-            symptom_description: {
-                value: '',
-                time: new Date().toString()
-            }
-        }
-    ],
-    userStatus: 'LoggedIn',
+        ],
+    },
+    userStatus: 'LoggedOut',
 
-    setUserUID: (s) => set(() => ({ userUID: s })),
-    setSimptoms: (s) => set(() => ({ simptoms: s })),
+    setUserData: (s) => set(() => ({ userData: s })),
+    setUserUID: (s) => set((state) => ({ userData: {...state.userData, userUID: s,},})),
+    setUserName: (s) => set((state) => ({ userData: {...state.userData, userName: s,},})),
+    setUserEmail: (s) => set((state) => ({ userData: {...state.userData, userEmail: s,},})),
+    setUserPhoneNumber: (s) => set((state) => ({ userData: {...state.userData, userPhoneNumber: s,},})),
+    setUserAddress: (s) => set((state) => ({ userData: {...state.userData, userAddress: s,},})),
+    setSimptoms: (s) => set((state) => ({ userData: {...state.userData, simptoms: s,},})),
     setUserStatus:(s) => set(() => ({ userStatus: s })),
-    logIn : onLogIn()
+    logIn: (s) => onLogIn(s),
 }));
 

@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
-import { initializeFirestore, collection, getDocs, onSnapshot, addDoc, updateDoc, doc, setDoc } from 'firebase/firestore'
+import { initializeFirestore, collection, getDocs, onSnapshot, addDoc, updateDoc, doc, setDoc, getDoc } from 'firebase/firestore'
 import { ISimptomsData } from "../interfaces";
 
 const firebaseConfig = {
@@ -49,6 +49,25 @@ export const SetDOC = (id:any, data:any) => {
   const docRef = doc(DB, "Patients", id)
   setDoc(docRef, data)
 }
+
+
+export async function getSpecificDocument( documentId:string) {
+  // Reference to the specific document
+  const docRef = doc(DB, 'Patients', documentId);
+  
+  // Fetch the document
+  const docSnap = await getDoc(docRef);
+  
+  if (docSnap.exists()) {
+    // Document data
+    return docSnap.data()
+  } else {
+    // Document does not exist
+    console.log("No such document!");
+  }
+}
+
+
  
 
 

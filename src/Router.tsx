@@ -5,23 +5,21 @@ import { EnterPage } from "./pages/enter/enter";
 import { AppPage } from "./pages/app/app";
 import { ErrorPage } from "./pages/error/error";
 import './router.scss'
-// import { useEffect, useState } from "react";
-// import { auth } from "./core/firebase/config";
+import { useEffect, useState } from "react";
+import { auth } from "./core/firebase/config";
+import { userStore } from "./core/stores/userStore";
 
 
 export function Router() {
-  // const navigate = useNavigate()
-  // useEffect(()=>{
-  //   console.log('test')
-  //   auth.onAuthStateChanged((user)=>{
-  //     console.log({user})
-  //     if (user) {
-  //       navigate('/app')
-  //     } else {
-  //       navigate('/login')
-  //     }
-  //   })
-  // },[])
+  const logIn = userStore((state)=> state.logIn)
+  useEffect(()=>{
+    console.log('test')
+    auth.onAuthStateChanged((user)=>{
+      logIn(user)
+      console.log({user})
+      
+    })
+  },[])
   return (
     <div className="router">
       <BrowserRouter>

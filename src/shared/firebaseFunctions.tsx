@@ -1,15 +1,27 @@
-import { SetDOC, onSnapshotUserCollection, unSubscribe } from "../core/firebase/config"
+import { SetDOC, getSpecificDocument, } from "../core/firebase/config"
+import { IUserData } from "../core/interfaces"
 
-export const onLogIn = () => {
+
+
+export const onLogIn = (user:any) => {
+   
+console.log('login TEST')
+ getSpecificDocument(user?.uid)
+    .then((resultDoc) => {
+    console.log(resultDoc?.userUID)
+    })
+
 
 
 }
 
-export function OnSignIn(res:any) {
-    
-    const data={
+const getDefaultUserData = (res:any) => {
+    const defaultData:IUserData={
         userUID: res.user.uid,
-        userEmail:  res.user.email,
+        userName: 'not added',
+        userEmail: res.user.email,
+        userPhoneNumber: 'not added',
+        userAddress: 'not added',
         simptoms: [
             {
                 strength:{
@@ -17,12 +29,17 @@ export function OnSignIn(res:any) {
                     time: new Date().toString(),
                 },
                 symptom_description: {
-                    value: 'defoult',
-                    time: new Date().toString()
+                    value: 'default',
+                    time: new Date().toString(),
                 }
             }
         ],
       }
-      SetDOC(res.user.uid,data)
-     console.log(res.user.uid)
+      return defaultData
+}
+
+export function OnSignIn(res:any) {
+    const defaultData = getDefaultUserData(res)
+    SetDOC(res.user.uid,defaultData)
+    console.log(res.user.uid)
 }
