@@ -7,8 +7,9 @@ import { userStore } from "../../core/stores/userStore";
 
 
 export function AppPage() {
-  const setUserStatus = userStore((state)=> state.setUserStatus)
+  const setUserStatus = userStore((state)=> state.setUserStatus);
   const userStatus = userStore((state) => state.userStatus);
+  const userName = userStore((state) => state.userData.userName);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,8 +34,6 @@ export function AppPage() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    
-    
 
 
   }
@@ -50,6 +49,7 @@ export function AppPage() {
     <LoadingWrapper isLoading={userStatus}>
       {
         <div className="app-page">
+          <h1>Hello {` ${userName}`}</h1>
           <button onClick={() => onLogOut()}>LogOut</button>
           <form className="patientform" onSubmit={handleSubmit}>
             <div>

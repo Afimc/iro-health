@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
-import { initializeFirestore, collection, getDocs, onSnapshot, addDoc, updateDoc, doc, setDoc, getDoc } from 'firebase/firestore'
+import { initializeFirestore, collection, onSnapshot, addDoc, updateDoc, doc, setDoc, getDoc } from 'firebase/firestore'
 import { ISimptomsData } from "../interfaces";
 
 const firebaseConfig = {
@@ -25,10 +25,10 @@ const PatientsCollection = collection(DB, 'Patients')
 
 export const onSnapshotUserCollection = (func: any) => onSnapshot(PatientsCollection, func)
 
-getDocs(PatientsCollection)
-  .then((result)=>{
-    console.log({result})
-  })
+// getDocs(PatientsCollection)
+//   .then((result)=>{
+//     console.log({result})
+//   })
 
 export const unSubscribe = onSnapshot(PatientsCollection,(result2)=>{
   console.log({result2})

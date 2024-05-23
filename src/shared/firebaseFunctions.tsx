@@ -2,16 +2,15 @@ import { SetDOC, getSpecificDocument, } from "../core/firebase/config"
 import { IUserData } from "../core/interfaces"
 
 
-
 export const onLogIn = (user:any) => {
+
    
 console.log('login TEST')
  getSpecificDocument(user?.uid)
     .then((resultDoc) => {
-    console.log(resultDoc?.userUID)
+
+    console.log({onlogin:resultDoc})
     })
-
-
 
 }
 
@@ -41,5 +40,5 @@ const getDefaultUserData = (res:any) => {
 export function OnSignIn(res:any) {
     const defaultData = getDefaultUserData(res)
     SetDOC(res.user.uid,defaultData)
-    console.log(res.user.uid)
+    console.log({newUserID:res.user.uid})
 }

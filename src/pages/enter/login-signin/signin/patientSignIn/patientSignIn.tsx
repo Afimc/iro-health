@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './patientSignIn.scss';
-import { SetDOC, createUserWithEmail } from '../../../../../core/firebase/config';
-import { setDoc } from 'firebase/firestore';
+import { createUserWithEmail } from '../../../../../core/firebase/config';
+
 import { OnSignIn } from '../../../../../shared/firebaseFunctions';
 
 export function PatientSignIn() {

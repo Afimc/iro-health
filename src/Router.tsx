@@ -5,20 +5,32 @@ import { EnterPage } from "./pages/enter/enter";
 import { AppPage } from "./pages/app/app";
 import { ErrorPage } from "./pages/error/error";
 import './router.scss'
-import { useEffect, useState } from "react";
-import { auth } from "./core/firebase/config";
+import { useEffect } from "react";
+import { auth, logOut } from "./core/firebase/config";
 import { userStore } from "./core/stores/userStore";
 
 
 export function Router() {
   const logIn = userStore((state)=> state.logIn)
+  const setUserName = userStore((state)=> state.setUserName)
   useEffect(()=>{
     console.log('test')
-    auth.onAuthStateChanged((user)=>{
-      logIn(user)
-      console.log({user})
-      
-    })
+    try {
+      auth.onAuthStateChanged((user)=>{
+        console.log({listenerUser:user})
+        setUserName(user?.email||'miro')
+        if (user === null){
+         logOut()
+        } else {
+          logIn(user)
+        }
+
+        
+      })
+    } catch (error) {
+      console.log(error)
+    }
+    
   },[])
   return (
     <div className="router">
