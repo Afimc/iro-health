@@ -6,8 +6,8 @@ export const userStore = create<IUserStore>()((set) => ({
     userData: {
         userUID: '',
         userName: '',
-        userEmail:'',
-        userPhoneNumber:'',
+        userEmail: '',
+        userPhoneNumber: '',
         userAddress: '',
         simptoms: [
             {
@@ -32,6 +32,6 @@ export const userStore = create<IUserStore>()((set) => ({
     setUserAddress: (s) => set((state) => ({ userData: {...state.userData, userAddress: s,},})),
     setSimptoms: (s) => set((state) => ({ userData: {...state.userData, simptoms: s,},})),
     setUserStatus:(s) => set(() => ({ userStatus: s })),
-    logIn: (s) => onLogIn(s),
+    logIn: (s) => onLogIn(s), 
 }));
 

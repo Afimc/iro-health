@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { initializeFirestore, collection, onSnapshot, addDoc, updateDoc, doc, setDoc, getDoc } from 'firebase/firestore'
-import { ISimptomsData } from "../interfaces";
+import { ISimptomsData, IUserData } from "../interfaces";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDGJo1ai_hhe-q95a4XtDjCPBb82uzhX4w",
@@ -81,7 +81,7 @@ export async function getSpecificDocument( documentId:string) {
 
   export async function updateDocs(collectionPath:any, docId:any, updateData:any) {
     try {
-        const docRef = doc(DB, collectionPath, docId);
+        const docRef = doc(DB, 'Patients', docId);
         await updateDoc(docRef, updateData);
         console.log("Document successfully updated!");
     } catch (error) {
@@ -90,7 +90,7 @@ export async function getSpecificDocument( documentId:string) {
 }
 
 
-export const update =(data:ISimptomsData) =>updateDocs(PatientsCollection, PatientsCollection.id,data )
+export const update =(data:IUserData,docId:any) =>updateDocs(PatientsCollection, docId,data )
   
 
 

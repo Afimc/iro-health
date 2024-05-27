@@ -1,15 +1,17 @@
+
 import { SetDOC, getSpecificDocument, } from "../core/firebase/config"
 import { IUserData } from "../core/interfaces"
 
 
+
 export const onLogIn = (user:any) => {
 
-   
 console.log('login TEST')
  getSpecificDocument(user?.uid)
     .then((resultDoc) => {
-
+      
     console.log({onlogin:resultDoc})
+
     })
 
 }

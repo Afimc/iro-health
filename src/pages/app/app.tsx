@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { logOut } from "../../core/firebase/config";
 import { LoadingWrapper } from "../../shared/loadingWrapper/loadingWrapper";
 import { userStore } from "../../core/stores/userStore";
+import { PersonalDataEnter } from "./personalDataEnter/personalDataEnter";
 
 
 export function AppPage() {
   const setUserStatus = userStore((state)=> state.setUserStatus);
   const userStatus = userStore((state) => state.userStatus);
-  const userName = userStore((state) => state.userData.userName);
+  const userData = userStore((state) => state.userData);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,24 +20,8 @@ export function AppPage() {
  
   }, []);
 
-  const [SimptomData, setSimptomData] = useState({
-    simptomsDiscribtion: "",
-    strenght: '',
-  });
-
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setSimptomData({
-      ...SimptomData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-
-
-  }
+  const [onDataEnter, setOnDataEnter] = useState(false)
+   
 
   function onLogOut() {
     logOut();
@@ -48,33 +33,14 @@ export function AppPage() {
   return (
     <LoadingWrapper isLoading={userStatus}>
       {
-        <div className="app-page">
-          <h1>Hello {` ${userName}`}</h1>
+        !onDataEnter
+        ?<div className="app-page">
+          <h1>Hello {` ${userData.userEmail} ID: ${userData.userUID}`}</h1>
           <button onClick={() => onLogOut()}>LogOut</button>
-          <form className="patientform" onSubmit={handleSubmit}>
-            <div>
-              <input
-                type="text"
-                name="simptomsDiscribtion"
-                placeholder="discribe your simptoms"
-                value={SimptomData.simptomsDiscribtion}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                name="strenght"
-                placeholder="enter the strenght"
-                value={SimptomData.strenght}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <button type="submit">send</button>
-          </form>
+          <button onClick={() => setOnDataEnter(true)} >Enter Your Data</button>
+          
         </div>
+        :<PersonalDataEnter/>
       }
     </LoadingWrapper>
   );
