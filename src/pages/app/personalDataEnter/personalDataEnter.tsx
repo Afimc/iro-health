@@ -14,9 +14,7 @@ export function PersonalDataEnter() {
   const userData = userStore((state) => state.userData);
 
   const navigate = useNavigate();
-  const setUserName = userStore((state) => state.setUserName);
-  const setUserAddress = userStore((state) => state.setUserAddress);
-  const setUserPhoneNumber = userStore((state) => state.setUserPhoneNumber);
+  
 
   useEffect(() => {
     if (userStatus==='LoggedOut') {
@@ -41,9 +39,7 @@ export function PersonalDataEnter() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    setUserName(personalData.name);
-    setUserAddress(personalData.address);
-    setUserPhoneNumber(personalData.phoneNumber);
+    
     const data:IUserData = {
         userUID: userData.userUID,
         userName: personalData.name,

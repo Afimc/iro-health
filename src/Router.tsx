@@ -12,16 +12,14 @@ import { userStore } from "./core/stores/userStore";
 
 export function Router() {
   const logIn = userStore((state)=> state.logIn);
-  const setUserEmail = userStore((state)=> state.setUserEmail);
-  const setUserUID = userStore((state)=> state.setUserUID);
+
   useEffect(()=>{
     console.log('test')
     try {
       auth.onAuthStateChanged((user)=>{
-        
-        console.log({listenerUser:user})
-        setUserEmail(user?.email||'')
-        setUserUID(user?.uid||'')
+        console.log('Listener Test')
+        // console.log({listenerUser:user})
+
         if (user === null){
          logOut()
         } else {

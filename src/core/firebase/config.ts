@@ -22,6 +22,10 @@ export const logOut = () => signOut(auth)
 export const DB = initializeFirestore(firebaseApp, {})
 
 const PatientsCollection = collection(DB, 'Patients')
+export  const onSnapsotUserData = (logedUser:any, func:any) =>{
+  const docRef = doc(DB, 'Patients', logedUser);
+   onSnapshot(docRef,func)
+} 
 
 export const onSnapshotUserCollection = (func: any) => onSnapshot(PatientsCollection, func)
 
@@ -31,14 +35,14 @@ export const onSnapshotUserCollection = (func: any) => onSnapshot(PatientsCollec
 //   })
 
 export const unSubscribe = onSnapshot(PatientsCollection,(result2)=>{
-  console.log({result2})
+  // console.log({result2})
   return result2
 })
-
+unSubscribe()
 
 export const addInfo = (data:ISimptomsData) => addDoc(PatientsCollection,data)
   .then((result3)=>{
-    console.log({result3})
+    // console.log({result3})
   })
   .catch((error)=>{
     console.log(error);

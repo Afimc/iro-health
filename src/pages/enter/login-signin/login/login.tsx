@@ -33,7 +33,7 @@ export function Login() {
     logInWithEmail(formData.email, formData.password)
       .then(()=>{
         navigate('/app');
-        setUserStatus('LoggedIn')
+   
         setFormData({
           email: '',
           password: ''
