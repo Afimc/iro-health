@@ -31,17 +31,17 @@ export function Login() {
   const handleSubmit = (e:any) => {
     e.preventDefault();
     logInWithEmail(formData.email, formData.password)
-      .then(()=>{
-        navigate('/app');
+      // .then(()=>{
+      //   navigate('/app');
    
-        setFormData({
-          email: '',
-          password: ''
-        });
-      })
-      .catch((error)=>{
-        console.log(error)
-      })
+      //   setFormData({
+      //     email: '',
+      //     password: ''
+      //   });
+      // })
+      // .catch((error)=>{
+      //   console.log(error)
+      // })
     
   };
 

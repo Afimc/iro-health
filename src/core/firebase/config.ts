@@ -16,19 +16,18 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 export const auth = getAuth(firebaseApp);
-export const logInWithEmail = (email: string, password: string) => signInWithEmailAndPassword(auth, email, password);
+export const logInWithEmail = (email: string, password: string) =>signInWithEmailAndPassword(auth, email, password);
 export const createUserWithEmail = (email: string, password: string) => createUserWithEmailAndPassword(auth, email, password);
-export const logOut = () => signOut(auth)
-export const DB = initializeFirestore(firebaseApp, {})
+export const userLogOut = () => signOut(auth);
+export const DB = initializeFirestore(firebaseApp, {});
+const PatientsCollection = collection(DB, 'Patients');
 
-const PatientsCollection = collection(DB, 'Patients')
 export  const onSnapsotUserData = (logedUser:any, func:any) =>{
   const docRef = doc(DB, 'Patients', logedUser);
    onSnapshot(docRef,func)
 } 
 
 export const onSnapshotUserCollection = (func: any) => onSnapshot(PatientsCollection, func)
-
 // getDocs(PatientsCollection)
 //   .then((result)=>{
 //     console.log({result})
