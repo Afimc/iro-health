@@ -1,5 +1,5 @@
 
-import { SetDOC, getSpecificDocument, } from "../core/firebase/config"
+import { SetDOC } from "../core/firebase/config"
 import { IUserData } from "../core/interfaces"
 
 

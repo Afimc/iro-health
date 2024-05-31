@@ -36,7 +36,7 @@ export const userStore = create<IUserStore>()((set) => ({
     setUserUnSubscriber: (s) => set(() => ({ userUnSubscriber: s })),
     logIn: (s) => {
         console.log('test in logIn')
-        set(() => ({ userStatus: 'LoggedIn' })),
+        set(() => ({ userStatus: 'LoggedIn' }));
         getSpecificDocument(s.uid)
             .then((resultDoc) => {
                 console.log({resultDoc})
@@ -48,7 +48,7 @@ export const userStore = create<IUserStore>()((set) => ({
                 set((state) => ({ userData: {...state.userData, simptoms: resultDoc?.simptoms}}));
                 const q = onSnapsotUserData(resultDoc?.userUID,(newData:any)=>{
                     set((state) => ({ userData: {...state.userData, userUID: newData._document.data.value.mapValue.fields.userUID.stringValue},}));
-                    set((state) => ({ userData: {...state.userData, userName: newData._document.data.value.mapValue.fields.userName.stringValue},})),
+                    set((state) => ({ userData: {...state.userData, userName: newData._document.data.value.mapValue.fields.userName.stringValue},}));
                     set((state) => ({ userData: {...state.userData, userEmail: newData._document.data.value.mapValue.fields.userEmail.stringValue},}));
                     set((state) => ({ userData: {...state.userData, userPhoneNumber: newData._document.data.value.mapValue.fields.userPhoneNumber.stringValue},}));
                     set((state) => ({ userData: {...state.userData, userAddress: newData._document.data.value.mapValue.fields.userAddress.stringValue},}));
