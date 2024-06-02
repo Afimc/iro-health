@@ -1,0 +1,17 @@
+.personalDataEnter {
+  .patientform {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    label { 
+      display: flex;
+      flex-direction: column;
+      input {
+        width: 25%;
+      }
+    }
+    button{
+        margin-top: 10px;
+    }
+  }
+}

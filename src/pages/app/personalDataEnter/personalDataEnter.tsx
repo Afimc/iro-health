@@ -8,7 +8,6 @@ import { IUserData } from "../../../core/interfaces";
 
 export function PersonalDataEnter() {
   const userStatus = userStore((state) => state.userStatus);
-  const userName = userStore((state) => state.userData.userName);
   const userData = userStore((state) => state.userData);
 
   const navigate = useNavigate();
@@ -56,44 +55,52 @@ export function PersonalDataEnter() {
       ],
     };
     update(data, userData.userUID);
+    navigate('/app')
   };
 
   return (
     <LoadingWrapper isLoading={userStatus}>
       {
-        <div className="app-page">
-          <h1>Hello {` ${userName}`}</h1>
-          <button onClick={() => navigate("/")}>Enter Your Data</button>
+        <div className="personalDataEnter">
           <form className="patientform" onSubmit={handleSubmit}>
             <div>
-              <input
-                type="text"
-                name="name"
-                placeholder="Enter your full name"
-                value={personalData.name}
-                onChange={handleChange}
-                required
-              />
+              <label>
+                Enter your name:
+                <input
+                  type="text"
+                  name="name"
+                  placeholder={userData.userName}
+                  value={personalData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
             </div>
             <div>
-              <input
-                type="text"
-                name="address"
-                placeholder="enter your address"
-                value={personalData.address}
-                onChange={handleChange}
-                required
-              />
+              <label>
+                Enter your address:     
+                <input
+                  type="text"
+                  name="address"
+                  placeholder={userData.userAddress}
+                  value={personalData.address}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
             </div>
             <div>
-              <input
-                type="text"
-                name="phoneNumber"
-                placeholder="enter your phoneNumber"
-                value={personalData.phoneNumber}
-                onChange={handleChange}
-                required
-              />
+              <label>
+                Enter your phone number:
+                <input
+                  type="text"
+                  name="phoneNumber"
+                  placeholder={userData.userPhoneNumber}
+                  value={personalData.phoneNumber}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
             </div>
             <button type="submit">send</button>
           </form>

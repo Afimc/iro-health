@@ -72,7 +72,7 @@ async function updateDocs(docId:any, updateData:any) {
       console.log("Document successfully updated!");
   } catch (error) {
       console.error("Error updating document: ", error);
-  }
+    }
 }
 
 export const update =(data:IUserData,docId:any) =>updateDocs(docId,data)

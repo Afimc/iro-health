@@ -5,12 +5,17 @@ export interface ILoadingWrapperProps {
     children: React.ReactNode;
 }
 
+export interface ISimptomsData {
+    strength: ISimptomStrenght;
+    symptom_description: IsymptomDescription;
+}
+
 export interface ISimptomStrenght {
     value: number;
     time: string;
 }
 
-export interface IsymprmDescription {
+export interface IsymptomDescription {
     value: string;
     time: string;
 }
@@ -42,9 +47,6 @@ export interface IUserStore {
     logOut: (s:any) => void;
 }
 
-export interface ISimptomsData {
-    strength: ISimptomStrenght;
-    symptom_description: IsymprmDescription;
-}
+
 
 

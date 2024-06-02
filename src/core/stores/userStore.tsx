@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { IUserStore } from "../interfaces";
 import { getSpecificDocument, onSnapsotUserData } from "../firebase/config";
 
-export const userStore = create<IUserStore>()((set) => ({
+export const userStore = create<IUserStore>()((set,get) => ({
     userData: {
         userUID: '',
         userName: '',
@@ -54,17 +54,28 @@ export const userStore = create<IUserStore>()((set) => ({
                     set((state) => ({ userData: {...state.userData, userAddress: newData._document.data.value.mapValue.fields.userAddress.stringValue},}));
                     set((state) => ({ userData: {...state.userData, simptoms: newData._document.data.value.mapValue.fields.simptoms.arrayValue.values},}));
                    console.log({newData})
-                   
+
                    set(() => ({ userUnSubscriber: q}));
-                   console.log({q})
+                   console.log({q:q})
             })
                 
-            });
+        });
     },
     logOut: () => {
         console.log('logOut Test')
+
+        const q = get().userUnSubscriber;
+        if (q) {
+            q();
+        }
         
         set(() => ({ userStatus: 'LoggedOut' }))
+        set((state) => ({ userData: {...state.userData, userUID: ''}}));
+        set((state) => ({ userData: {...state.userData, userName: ''}}));
+        set((state) => ({ userData: {...state.userData, userEmail: ''}}));
+        set((state) => ({ userData: {...state.userData, userPhoneNumber: ''}}));
+        set((state) => ({ userData: {...state.userData, userAddress: ''}}));
+        set((state) => ({ userData: {...state.userData, simptoms: [{strength:{value: 0,time: ''},symptom_description: {value: '',time: ''}}]}}));
     },
     
 }));

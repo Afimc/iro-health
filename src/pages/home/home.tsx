@@ -1,8 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import './home.scss'
+import { userStore } from '../../core/stores/userStore';
+import { useEffect } from 'react';
 
 export function HomePage() {
+  const userData = userStore((state) => state.userData)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    console.log(userData)
+ 
+  }, []);
 
   return (
   <div className="home-page">
