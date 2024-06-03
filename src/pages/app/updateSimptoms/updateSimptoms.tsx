@@ -1,18 +1,40 @@
+
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { LoadingWrapper } from "../../../shared/loadingWrapper/loadingWrapper";
 import { userStore } from "../../../core/stores/userStore";
 
 
 export function UpdateSimptoms() {
-  const userUnSubscriber = userStore((state) => state.userUnSubscriber)
-   
+  const userStatus = userStore((state) => state.userStatus);
+  const userData = userStore((state) => state.userData);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
-    console.log(userUnSubscriber)
- 
+    if (userStatus === "LoggedOut") {
+      navigate("/login");
+    }
   }, []);
-   
+
+
+
 
   return (
-     <div className="newSimptoms"> Update Simptoms</div> 
-    );
-  }
-  
+    <LoadingWrapper isLoading={userStatus}>
+      {
+        <div className="updateSimptoms">
+          {/* <ol>
+            {
+              
+              userData.simptoms?.map((s,i) => {
+                return <li key={i}>{s.symptom_description.value}</li>
+              }
+              )
+            }
+          </ol> */}
+        </div>
+      }
+    </LoadingWrapper>
+  );
+}

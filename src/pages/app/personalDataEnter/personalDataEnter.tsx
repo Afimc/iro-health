@@ -41,18 +41,7 @@ export function PersonalDataEnter() {
       userEmail: userData.userEmail,
       userAddress: personalData.address,
       userPhoneNumber: personalData.phoneNumber,
-      simptoms: [
-        {
-          strength: {
-            value: 0,
-            time: new Date().toString(),
-          },
-          symptom_description: {
-            value: "default",
-            time: new Date().toString(),
-          },
-        },
-      ],
+      simptoms: userData.simptoms,
     };
     update(data, userData.userUID);
     navigate('/app')

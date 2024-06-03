@@ -20,7 +20,7 @@ export function NewSimptoms() {
 
   const [sipmptomEnterData, setSipmptomEnterData] = useState({
     simptom: "",
-    strenght: "",
+    strenght: 0,
   });
 
   const handleChange = (e: any) => {
@@ -31,20 +31,26 @@ export function NewSimptoms() {
     });
   };
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-
-    const data: ISimptomsData = {
-      strength: {
-        value: 1,
+  function getData() {
+    const data = userData
+    const newSimptom:ISimptomsData = {
+      strength: {    
+        value: sipmptomEnterData.strenght,
         time: new Date().toString(),
       },
       symptom_description: {
-        value: '',
+        value: sipmptomEnterData.simptom,
         time: new Date().toString(),
-      }
-    };
-    addInfo(data)
+      },
+    }
+    data.simptoms.push(newSimptom)
+    return data
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const data = getData()
+    update(data, userData.userUID);
     navigate('/app')
   };
 

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { IUserStore } from "../interfaces";
 import { getSpecificDocument, onSnapsotUserData } from "../firebase/config";
+import { setNewSimptoms } from "../../shared/firebaseFunctions";
 
 export const userStore = create<IUserStore>()((set,get) => ({
     userData: {
@@ -47,13 +48,16 @@ export const userStore = create<IUserStore>()((set,get) => ({
                 set((state) => ({ userData: {...state.userData, userAddress: resultDoc?.userAddress}}));
                 set((state) => ({ userData: {...state.userData, simptoms: resultDoc?.simptoms}}));
                 const q = onSnapsotUserData(resultDoc?.userUID,(newData:any)=>{
+                    // console.log({newData})
+                    const n = setNewSimptoms(newData)
+                    console.log({n})
                     set((state) => ({ userData: {...state.userData, userUID: newData._document.data.value.mapValue.fields.userUID.stringValue},}));
                     set((state) => ({ userData: {...state.userData, userName: newData._document.data.value.mapValue.fields.userName.stringValue},}));
                     set((state) => ({ userData: {...state.userData, userEmail: newData._document.data.value.mapValue.fields.userEmail.stringValue},}));
                     set((state) => ({ userData: {...state.userData, userPhoneNumber: newData._document.data.value.mapValue.fields.userPhoneNumber.stringValue},}));
                     set((state) => ({ userData: {...state.userData, userAddress: newData._document.data.value.mapValue.fields.userAddress.stringValue},}));
-                    set((state) => ({ userData: {...state.userData, simptoms: newData._document.data.value.mapValue.fields.simptoms.arrayValue.values},}));
-                   console.log({newData})
+                    set((state) => ({ userData: {...state.userData, simptoms:[s]},}));
+                 
 
                    set(() => ({ userUnSubscriber: q}));
                    console.log({q:q})
