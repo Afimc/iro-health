@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoadingWrapper } from "../../../shared/loadingWrapper/loadingWrapper";
 import { userStore } from "../../../core/stores/userStore";
-import { addInfo, update } from "../../../core/firebase/config";
-import { ISimptomsData, IUserData } from "../../../core/interfaces";
+import { update } from "../../../core/firebase/config";
+import { ISimptomsData } from "../../../core/interfaces";
 
 export function NewSimptoms() {
   const userStatus = userStore((state) => state.userStatus);
