@@ -31,6 +31,17 @@ export  const onSnapsotUserData = (logedUser:any, func:any) =>{
   onSnapshot(docRef,func)
 } 
 
+
+// export  const onSnapsotUserData = (logedUser:any, func:any) =>{
+//   const docRef = doc(DB, 'Patients', logedUser);
+//   const unsubscribe = onSnapshot(docRef,(document)=>{
+//     console.log(document)
+    
+//     func(document)
+//   })
+//   return unsubscribe
+// } 
+
 export const onSnapshotUserCollection = (func: any) => onSnapshot(PatientsCollection, func)
 // getDocs(PatientsCollection)
 //   .then((result)=>{

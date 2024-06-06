@@ -16,8 +16,8 @@ export function AppPage() {
   useEffect(() => {
     if (userStatus==='LoggedOut') {
       navigate("/login");
+      console.log({userData})
     }
- 
   }, []);
    
  
