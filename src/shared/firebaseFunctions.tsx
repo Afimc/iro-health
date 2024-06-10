@@ -14,6 +14,17 @@ import { ISimptomsData, IUserData, IsymptomDescription } from "../core/interface
 //     })
 
 // }
+export const getDefaultNoUserData = () => {
+    const defaultData:IUserData={
+        userUID: '',
+        userName: '',
+        userEmail: '',
+        userPhoneNumber: '',
+        userAddress: '',
+        simptoms: [],
+      }
+      return defaultData
+}
 
 const getDefaultUserData = (res:any) => {
     const defaultData:IUserData={
@@ -33,8 +44,6 @@ export function OnSignIn(res:any) {
     console.log({newUserID:res.user.uid})
 }
 
-
-
 export function getNewSimptoms(data:any){
     console.log({data})
     const newSimptoms:ISimptomsData[] = data.map((f:any)=>{
@@ -51,13 +60,11 @@ export function getNewSimptoms(data:any){
     })
     console.log({newSimptoms})
     return newSimptoms
-
 }
 
-
 export function getDataForSetupOnSnapshot(newData:any){
-    const newSimptoms = getNewSimptoms(newData._document.data.value.mapValue.fields.simptoms.arrayValue.values)
-
+    const simptoms = newData._document.data.value.mapValue.fields.simptoms.arrayValue.values || []
+    const newSimptoms = getNewSimptoms(simptoms)
     const data:IUserData =  {
         userUID: newData._document.data.value.mapValue.fields.userUID.stringValue,
         userName: newData._document.data.value.mapValue.fields.userName.stringValue,
@@ -70,20 +77,8 @@ export function getDataForSetupOnSnapshot(newData:any){
 }
 
 
-// {
-//     strength:{
-//         value: 0,
-//         time: new Date().toString(),
-//     },
-//     symptom_description: {
-//         value: '',
-//         time: new Date().toString()
-//     },
-// }
-
-
-
-export function getDataForSetup(resultDoc:any){
+export function getDataForSetupSpecificDocument(resultDoc:any){
+    console.log({resultdoc2:resultDoc})
     const data:IUserData =  {
         userUID: resultDoc.userUID,
         userName: resultDoc.userName,

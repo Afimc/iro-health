@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { IUserStore } from "../interfaces";
 import { getSpecificDocument, onSnapsotUserData } from "../firebase/config";
-import { getDataForSetup, getDataForSetupOnSnapshot } from "../../shared/firebaseFunctions";
+import { getDataForSetupOnSnapshot, getDataForSetupSpecificDocument, getDefaultNoUserData } from "../../shared/firebaseFunctions";
 // import { setNewSimptoms } from "../../shared/firebaseFunctions";
 
 export const userStore = create<IUserStore>()((set,get) => ({
@@ -27,38 +27,21 @@ export const userStore = create<IUserStore>()((set,get) => ({
     setUserUnSubscriber: (s) => set(() => ({ userUnSubscriber: s })),
     logIn: (s) => {
         console.log('test in logIn')
-        set(() => ({ userStatus: 'LoggedIn' }));
         getSpecificDocument(s.uid)
             .then((resultDoc) => {
                 console.log({resultDoc})
-                const dataForSetup = getDataForSetup(resultDoc)
-                // set((state) => ({ userData: {...state.userData, userUID: resultDoc?.userUID}}));
-                // set((state) => ({ userData: {...state.userData, userName: resultDoc?.userName}}));
-                // set((state) => ({ userData: {...state.userData, userEmail: resultDoc?.userEmail}}));
-                // set((state) => ({ userData: {...state.userData, userPhoneNumber: resultDoc?.userPhoneNumber}}));
-                // set((state) => ({ userData: {...state.userData, userAddress: resultDoc?.userAddress}}));
-                // set((state) => ({ userData: {...state.userData, simptoms: resultDoc?.simptoms}}));
-                set(() => ({ userData: dataForSetup }));
+                const dataForSetup = getDataForSetupSpecificDocument(resultDoc)
                 const unsubscribe = onSnapsotUserData(resultDoc?.userUID,(newData:any)=>{
+                    console.log({newData})
                     const dataForSetup = getDataForSetupOnSnapshot(newData);
-                 
-                    // set((state) => ({ userData: {...state.userData, userUID: newData._document.data.value.mapValue.fields.userUID.stringValue},}));
-                    // set((state) => ({ userData: {...state.userData, userName: newData._document.data.value.mapValue.fields.userName.stringValue},}));
-                    // set((state) => ({ userData: {...state.userData, userEmail: newData._document.data.value.mapValue.fields.userEmail.stringValue},}));
-                    // set((state) => ({ userData: {...state.userData, userPhoneNumber: newData._document.data.value.mapValue.fields.userPhoneNumber.stringValue},}));
-                    // set((state) => ({ userData: {...state.userData, userAddress: newData._document.data.value.mapValue.fields.userAddress.stringValue},}));
-                    // set((state) => ({ userData: {...state.userData, simptoms:n},}));
-
                     set(() => ({ userData: dataForSetup }));
-
-                    set(() => ({ userUnSubscriber: unsubscribe}));
-                  
                 })
-                
+                set(() => ({ userUnSubscriber: unsubscribe, userStatus: 'LoggedIn', userData: dataForSetup}));
                 console.log({unsubscribe})
                 
         });
     },
+
     logOut: () => {
         console.log('logOut Test')
         console.log({a:get().userUnSubscriber})
@@ -67,14 +50,9 @@ export const userStore = create<IUserStore>()((set,get) => ({
         if (unsubscribe) {
             unsubscribe();
         }
-        
-        set(() => ({ userStatus: 'LoggedOut' }))
-        set((state) => ({ userData: {...state.userData, userUID: ''}}));
-        set((state) => ({ userData: {...state.userData, userName: ''}}));
-        set((state) => ({ userData: {...state.userData, userEmail: ''}}));
-        set((state) => ({ userData: {...state.userData, userPhoneNumber: ''}}));
-        set((state) => ({ userData: {...state.userData, userAddress: ''}}));
-        set((state) => ({ userData: {...state.userData, simptoms: []}}));
+        set(() => ({ userStatus: 'LoggedOut' }));
+        const dataForSetup = getDefaultNoUserData(); 
+        set(() => ({ userData: dataForSetup }));
     },
     
 }));

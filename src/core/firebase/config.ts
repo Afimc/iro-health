@@ -28,7 +28,9 @@ export const SetDOC = (id:any, data:any) => {
 
 export  const onSnapsotUserData = (logedUser:any, func:any) =>{
   const docRef = doc(DB, 'Patients', logedUser);
-  onSnapshot(docRef,func)
+  const unsubscriber = onSnapshot(docRef,func)
+  return unsubscriber
+ 
 } 
 
 
