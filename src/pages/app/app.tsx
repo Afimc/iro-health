@@ -25,10 +25,10 @@ export function AppPage() {
   return (
     <LoadingWrapper isLoading={userStatus}>
     <div className="app-page">
-        <header>
+        <header className="header">
           <h1>{`Hello ${userData.userName} `}</h1>
-          <nav>
-            <ul>
+          <nav className="nav">
+            <ul className="nav-items">
               <li><Link to="personalDataEnter">Update Personal Data</Link></li>
               <li><Link to="newSimptoms">Add New Simptoms</Link></li>
               <li><Link to="updateSimptoms">Update Simptoms</Link></li>
